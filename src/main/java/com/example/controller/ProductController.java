@@ -38,4 +38,13 @@ public class ProductController {
         return productService.findByPriceBetween(priceAfter, priceBefore);
     }
 
+    @GetMapping("/{id}")
+    public Product findById(@PathVariable Long id){
+        return productService.findById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id){
+        productService.delete(id);
+    }
 }

@@ -21,6 +21,14 @@ public class ProductService {
         return productRepository.save(product);
     }
 
+    public Product findById(Long id){
+        return productRepository.findById(id).orElse(null);
+    }
+
+    public void delete(Long id){
+        productRepository.deleteById(id);
+    }
+
     public List<Product> findByPriceGreaterThan(Double price){
         return productRepository.findByPriceGreaterThan(price);
     }
