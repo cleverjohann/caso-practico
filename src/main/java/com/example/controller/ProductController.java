@@ -1,9 +1,9 @@
 package com.example.controller;
 
 import com.example.Product;
+import com.example.dto.ProductDTO;
 import com.example.service.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,12 +16,12 @@ public class ProductController {
     private final ProductService productService;
 
     @RequestMapping
-    public List<Product> findAll(){
+    public List<ProductDTO> findAll(){
         return productService.findAll();
     }
 
     @RequestMapping("/save")
-    public Product save(@RequestBody Product product){
+    public ProductDTO save(@RequestBody Product product){
         return productService.save(product);
     }
 
@@ -47,4 +47,15 @@ public class ProductController {
     public void delete(@PathVariable Long id){
         productService.delete(id);
     }
+
+    @GetMapping("/cookie")
+    public String getCookie(@CookieValue(value = "user-token", defaultValue = "desconocido") String token){
+        return "Tu navegador es "+token;
+    }
+
+    @GetMapping("/filter")
+    public List<Product> buscarPorNombre(@RequestParam String nombre){
+        return productService.buscarPorNombre(nombre);
+    }
+
 }

@@ -1,7 +1,9 @@
 package com.example.service;
 
 import com.example.Product;
+import com.example.dto.ProductDTO;
 import com.example.repository.ProductRepository;
+import com.example.util.ProductMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,13 +14,14 @@ import java.util.List;
 public class ProductService {
 
     private final ProductRepository productRepository;
+    private final ProductMapper productMapper;
 
-    public List<Product> findAll() {
-        return productRepository.findAll();
+    public List<ProductDTO> findAll() {
+        return productMapper.toDTO(productRepository.findAll());
     }
 
-    public Product save (Product product){
-        return productRepository.save(product);
+    public ProductDTO save (Product product){
+        return productMapper.toDTO(productRepository.save(product));
     }
 
     public Product findById(Long id){
@@ -35,5 +38,9 @@ public class ProductService {
 
     public List<Product> findByPriceBetween(Double priceAfter, Double priceBefore){
         return productRepository.findByPriceBetween(priceAfter, priceBefore);
+    }
+
+    public List<Product> buscarPorNombre(String nombre){
+        return productRepository.buscarPorNombre(nombre);
     }
 }
