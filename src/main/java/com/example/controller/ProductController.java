@@ -23,8 +23,8 @@ public class ProductController {
     }
 
     @RequestMapping("/save")
-    public ProductDTO save(@RequestBody Product product){
-        return productService.save(product);
+    public ProductDTO save(@RequestBody ProductDTO request){
+        return productService.save(request);
     }
 
     @GetMapping("/price-greater-than")

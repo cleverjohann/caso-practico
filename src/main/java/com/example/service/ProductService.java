@@ -21,8 +21,8 @@ public class ProductService {
         return productMapper.toDTO(productRepository.findAll());
     }
 
-    public ProductDTO save (Product product){
-        return productMapper.toDTO(productRepository.save(product));
+    public ProductDTO save (ProductDTO product){
+        return productMapper.toDTO(productRepository.save(productMapper.toEntity(product)));
     }
 
     public ProductDTO findById(Long id){
